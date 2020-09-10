@@ -3,9 +3,9 @@
     <h1>Posts</h1>
     <div class="new-post">
       <h2>New post</h2>
-      <input type="text" placeholder="Post title" v-model="postTitle" />
-      <textarea type="text" placeholder="Post content" v-model="postBody"></textarea>
-      <button class="submit-post" @click="submitPost">Submit</button>
+      <input id="title-input" type="text" placeholder="Post title" v-model="postTitle" />
+      <textarea id="body-input" placeholder="Post content" v-model="postBody"></textarea>
+      <button id="submit-input" class="submit-post" @click="submitPost">Submit</button>
     </div>
     <div class="posts">
       <Post
@@ -28,19 +28,34 @@ import Post from '@/components/Post.vue'
 export default {
   name: 'Home',
   data() {
-    return {
-      posts: [],
-    }
+    return {}
   },
   setup() {
     // new post
     const postTitle = ref('')
     const postBody = ref('')
+    const posts = ref([])
+
+    const fetchPosts = async () => {
+      const resp = await fetch('http://jsonplaceholder.typicode.com/posts')
+      posts.value = (await resp.json()).slice(0, 5)
+      console.log(posts.value)
+    }
+    fetchPosts()
+
     const submitPost = () => {
       console.log('title', postTitle.value)
       console.log('body', postBody.value)
+      console.log(posts.value)
+      posts.value.push({
+        title: postTitle,
+        body: postBody,
+        id: posts.value[posts.value.length - 1].id + 1,
+        userId: 0,
+      })
     }
     return {
+      posts,
       postTitle,
       postBody,
       submitPost,
@@ -49,10 +64,7 @@ export default {
   components: {
     Post,
   },
-  async created() {
-    const resp = await fetch('http://jsonplaceholder.typicode.com/posts')
-    this.posts = (await resp.json()).slice(0, 5)
-  },
+  async created() {},
 }
 </script>
 
