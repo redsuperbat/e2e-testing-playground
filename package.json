@@ -8,9 +8,6 @@
     "lint": "vue-cli-service lint",
     "test": "jest"
   },
-  "jest": {
-    "preset": "jest-playwright-preset"
-  },
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^3.0.0-0",

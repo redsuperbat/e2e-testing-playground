@@ -1,9 +1,9 @@
 const { webkit, chromium, firefox } = require('playwright')
 const expect = require('expect')
 
-const browsers = { webkit, chromium, firefox }
+const browsers = { webkit, chromium, firefox };
 
-;(async () => {
+(async () => {
   for (let key of Object.keys(browsers)) {
     let browser
     let page

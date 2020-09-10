@@ -1,3 +1,3 @@
 module.exports = {
-  testEnivronment: './e2e/playwright.js',
+  preset: 'jest-playwright-preset',
 }

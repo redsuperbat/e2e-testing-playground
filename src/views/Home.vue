@@ -47,7 +47,7 @@ export default {
       console.log('title', postTitle.value)
       console.log('body', postBody.value)
       console.log(posts.value)
-      posts.value.push({
+      posts.value.unshift({
         title: postTitle,
         body: postBody,
         id: posts.value[posts.value.length - 1].id + 1,
