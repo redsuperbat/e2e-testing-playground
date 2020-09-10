@@ -1,12 +1,13 @@
-const playwright = require('playwright');
+const { webkit, chromium, firefox } = require('playwright')
 
-(async () => {
-  for (const browserType of ['chromium', 'firefox', 'webkit']) {
-    const browser = await playwright[browserType].launch();
-    const context = await browser.newContext();
-    const page = await context.newPage('http://google.com/');
+const browsers = { webkit, chromium, firefox }
 
-    await page.screenshot({ path: `example-${browserType}.png` });
-    await browser.close();
+;(async () => {
+  for (let key of Object.keys(browsers)) {
+    const browser = await browsers[key].launch()
+    const page = await browser.newPage()
+    await page.goto('https://google.com/')
+    await page.screenshot({ path: `example-${key}.png` })
+    await browser.close()
   }
-})();
+})()
