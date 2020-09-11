@@ -7,7 +7,7 @@
       <textarea id="body-input" placeholder="Post content" v-model="postBody"></textarea>
       <button id="submit-input" class="submit-post" @click="submitPost">Submit</button>
     </div>
-    <div class="posts">
+    <div id="posts" class="posts">
       <Post
         v-for="post in posts"
         :key="post.id"
